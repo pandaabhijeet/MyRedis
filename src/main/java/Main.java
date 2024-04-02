@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.Charset;
@@ -27,12 +28,13 @@ public class Main {
          //clientSocket.getOutputStream().write(response.getBytes(Charset.defaultCharset()));
 
          BufferedReader inReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+         OutputStream os = clientSocket.getOutputStream();
          String input;
          while ((input = inReader.readLine()) != null) {
          System.out.println(input);
 
           if(input != null){
-            clientSocket.getOutputStream().write(response.getBytes(Charset.defaultCharset()));
+            os.write(response.getBytes(Charset.defaultCharset()));
           }
           
          } 
