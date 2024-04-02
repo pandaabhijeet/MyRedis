@@ -1,4 +1,6 @@
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.Charset;
@@ -13,6 +15,8 @@ public class Main {
        Socket clientSocket = null;
        int port = 6379;
        String response = "+PONG\r\n";
+       BufferedReader inReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
        try {
          serverSocket = new ServerSocket(port);
          // Since the tester restarts your program quite often, setting SO_REUSEADDR
@@ -21,8 +25,18 @@ public class Main {
          // Wait for connection from client.
          clientSocket = serverSocket.accept();
 
-         clientSocket.getOutputStream().write(response.getBytes(Charset.defaultCharset()));
-         
+         //clientSocket.getOutputStream().write(response.getBytes(Charset.defaultCharset()));
+
+         String input;
+         while ((input = inReader.readLine()) != null) {
+         System.out.println(input);
+
+          if(input != null){
+            clientSocket.getOutputStream().write(response.getBytes(Charset.defaultCharset()));
+          }
+          
+         } 
+
        } catch (IOException e) {
          System.out.println("IOException: " + e.getMessage());
        } finally {
