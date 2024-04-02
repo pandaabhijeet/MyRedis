@@ -33,7 +33,7 @@ public class Main {
          while ((input = inReader.readLine()) != null) {
          System.out.println(input);
 
-          if(input != null){
+          if(input.equals("ping")){
             os.write(response.getBytes(Charset.defaultCharset()));
           }
           
