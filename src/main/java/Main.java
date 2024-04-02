@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.charset.Charset;
 
 public class Main {
   public static void main(String[] args){
@@ -11,6 +12,7 @@ public class Main {
        ServerSocket serverSocket = null;
        Socket clientSocket = null;
        int port = 6379;
+       String response = "+PONG\r\n";
        try {
          serverSocket = new ServerSocket(port);
          // Since the tester restarts your program quite often, setting SO_REUSEADDR
@@ -18,6 +20,9 @@ public class Main {
          serverSocket.setReuseAddress(true);
          // Wait for connection from client.
          clientSocket = serverSocket.accept();
+
+         clientSocket.getOutputStream().write(response.getBytes(Charset.defaultCharset()));
+         
        } catch (IOException e) {
          System.out.println("IOException: " + e.getMessage());
        } finally {
