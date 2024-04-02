@@ -15,8 +15,7 @@ public class Main {
        Socket clientSocket = null;
        int port = 6379;
        String response = "+PONG\r\n";
-       BufferedReader inReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-
+      
        try {
          serverSocket = new ServerSocket(port);
          // Since the tester restarts your program quite often, setting SO_REUSEADDR
@@ -27,6 +26,7 @@ public class Main {
 
          //clientSocket.getOutputStream().write(response.getBytes(Charset.defaultCharset()));
 
+         BufferedReader inReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
          String input;
          while ((input = inReader.readLine()) != null) {
          System.out.println(input);
