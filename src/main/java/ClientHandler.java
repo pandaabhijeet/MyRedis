@@ -46,7 +46,7 @@ public class ClientHandler implements Runnable {
 
                 if(respCommands.get(0).equalsIgnoreCase("ECHO")){
                     
-                    response = "+" + respCommands.get(1) + "\r";
+                    response = "+" + respCommands.get(1) + "\r\n";
                     System.out.println(response);
                     outputStream.write(response.getBytes(Charset.defaultCharset()));
                     //printwriter.write("+" + respCommands.get(1) + "\r");
