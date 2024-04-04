@@ -14,42 +14,47 @@ public class RESPCommandParser {
         while(true){
             char type = (char) b;
 
-            switch (type) {
-                case '*':
-                    StringBuilder numCommandBuilder = new StringBuilder();
-                    while((b = inputStream.read()) != '\r'){
-                        numCommandBuilder.append((char) b);
-                    }
-
-                    inputStream.read();
-
-                    int numCommands = Integer.parseInt(numCommandBuilder.toString());
-
-                    for(int i=0; i < numCommands; i++){
-                        StringBuilder componentString = new StringBuilder();
-                        inputStream.read();
-
-                        while ((b = inputStream.read()) != '\r') {
-                            componentString.append((char) b);
+            try{
+                switch (type) {
+                    case '*':
+                        StringBuilder numCommandBuilder = new StringBuilder();
+                        while((b = inputStream.read()) != '\r'){
+                            numCommandBuilder.append((char) b);
                         }
+    
                         inputStream.read();
-
-                        int numComponentStr = Integer.parseInt(componentString.toString());
-                        StringBuilder finalStr = new StringBuilder();
-
-                        for(int j =0; j<numComponentStr; j++){
-                            finalStr.append((char)inputStream.read());
+    
+                        int numCommands = Integer.parseInt(numCommandBuilder.toString());
+    
+                        for(int i=0; i < numCommands; i++){
+                            StringBuilder componentString = new StringBuilder();
+                            inputStream.read();
+    
+                            while ((b = inputStream.read()) != '\r') {
+                                componentString.append((char) b);
+                            }
+                            inputStream.read();
+    
+                            int numComponentStr = Integer.parseInt(componentString.toString());
+                            StringBuilder finalStr = new StringBuilder();
+    
+                            for(int j =0; j<numComponentStr; j++){
+                                finalStr.append((char)inputStream.read());
+                            }
+    
+                            respCommands.add(finalStr.toString());
+                            inputStream.read();
+                            inputStream.read();
                         }
-
-                        respCommands.add(finalStr.toString());
-                        inputStream.read();
-                        inputStream.read();
-                    }
-
-                return respCommands;    
-                default:
-                    throw new IOException("Invalid protocol: " +type);
+    
+                    return respCommands;    
+                    default:
+                        throw new IOException("Invalid protocol: " +type);
+                }
+            }catch(IOException e){
+                throw new IOException(e);
             }
+            
         }
     } 
 }
