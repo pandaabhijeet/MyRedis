@@ -11,7 +11,6 @@ public class RESPCommandParser {
         List<String> respCommands = new ArrayList<>();
         int b = inputStream.read();
 
-        try {
             while (true) {
                 char type = (char) b;
 
@@ -26,7 +25,6 @@ public class RESPCommandParser {
 
                         int numCommands = Integer.parseInt(numCommandBuilder.toString());
 
-                        try {
                             for (int i = 0; i < numCommands; i++) {
                                 StringBuilder componentString = new StringBuilder();
                                 inputStream.read();
@@ -47,20 +45,15 @@ public class RESPCommandParser {
                                 inputStream.read();
                                 inputStream.read();
                             }
-                        } catch (IOException e) {
-                            throw new IOException(e);
-                        }
-
+                        
                         return respCommands;
+                        
                     default:
-
                     System.out.println("invalid protocol.");
-                        //throw new IOException("Invalid protocol: " + type);
+                    //throw new IOException("Invalid protocol: " + type);
                 }
 
             }
-        } catch (IOException e) {
-            throw new IOException(e);
-        }
     }
+
 }
