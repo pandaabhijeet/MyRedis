@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RESPCommandParser {
-    public List<String> readRespCommands(InputStream inputStream) {
+    public List<String> readRespCommands(InputStream inputStream) throws IOException{
 
         // *2\r\n$5\r\nhello\r\n$5\r\nworld\r\n
 
