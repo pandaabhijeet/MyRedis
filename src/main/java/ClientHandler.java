@@ -20,7 +20,7 @@ public class ClientHandler implements Runnable {
         try { 
             //BufferedReader inReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             OutputStream outputStream = clientSocket.getOutputStream();
-            PrintWriter printwriter = new PrintWriter(outputStream);
+            PrintWriter printwriter = new PrintWriter(outputStream,true);
             //String input;
             String response = "+PONG\r\n";
             // while ((input = inReader.readLine()) != null) {
@@ -45,6 +45,7 @@ public class ClientHandler implements Runnable {
                 }
 
                 if(respCommands.get(0).equalsIgnoreCase("ECHO")){
+                    System.out.println(respCommands.get(1));
                     printwriter.write("+" + respCommands.get(1) + "\r");
                 }
             }
