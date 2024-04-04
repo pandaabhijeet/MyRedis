@@ -47,8 +47,8 @@ public class ClientHandler implements Runnable {
                 }
             }
         } catch (IOException e) {
-            //throw new RuntimeException(e);
-            System.out.println("IOException: " + e.getMessage());
+            throw new RuntimeException(e);
+            //System.out.println("IOException: " + e.getMessage());
         } finally {
             try {
                 if (clientSocket != null) {
