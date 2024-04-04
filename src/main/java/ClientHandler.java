@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.nio.charset.Charset;
 import java.util.List;
@@ -19,6 +20,7 @@ public class ClientHandler implements Runnable {
         try { 
             //BufferedReader inReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             OutputStream outputStream = clientSocket.getOutputStream();
+            PrintWriter printwriter = new PrintWriter(outputStream);
             //String input;
             String response = "+PONG\r\n";
             // while ((input = inReader.readLine()) != null) {
@@ -43,7 +45,7 @@ public class ClientHandler implements Runnable {
                 }
 
                 if(respCommands.get(0).equalsIgnoreCase("ECHO")){
-                    outputStream.write(respCommands.get(1).getBytes(Charset.defaultCharset()));
+                    printwriter.write("+" + respCommands.get(1) + "\r");
                 }
             }
         } catch (IOException e) {
