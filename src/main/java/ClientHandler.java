@@ -45,8 +45,11 @@ public class ClientHandler implements Runnable {
                 }
 
                 if(respCommands.get(0).equalsIgnoreCase("ECHO")){
-                    System.out.println(respCommands.get(1));
-                    printwriter.write("+" + respCommands.get(1) + "\r");
+                    
+                    response = "+" + respCommands.get(1) + "\r";
+                    System.out.println(response);
+                    outputStream.write(response.getBytes(Charset.defaultCharset()));
+                    //printwriter.write("+" + respCommands.get(1) + "\r");
                 }
             }
         } catch (IOException e) {
