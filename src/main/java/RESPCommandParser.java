@@ -53,7 +53,9 @@ public class RESPCommandParser {
 
                         return respCommands;
                     default:
-                        throw new IOException("Invalid protocol: " + type);
+
+                    System.out.println("invalid protocol.");
+                        //throw new IOException("Invalid protocol: " + type);
                 }
 
             }
