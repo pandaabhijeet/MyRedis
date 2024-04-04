@@ -26,25 +26,29 @@ public class RESPCommandParser {
 
                         int numCommands = Integer.parseInt(numCommandBuilder.toString());
 
-                        for (int i = 0; i < numCommands; i++) {
-                            StringBuilder componentString = new StringBuilder();
-                            inputStream.read();
+                        try {
+                            for (int i = 0; i < numCommands; i++) {
+                                StringBuilder componentString = new StringBuilder();
+                                inputStream.read();
 
-                            while ((b = inputStream.read()) != '\r') {
-                                componentString.append((char) b);
+                                while ((b = inputStream.read()) != '\r') {
+                                    componentString.append((char) b);
+                                }
+                                inputStream.read();
+
+                                int numComponentStr = Integer.parseInt(componentString.toString());
+                                StringBuilder finalStr = new StringBuilder();
+
+                                for (int j = 0; j < numComponentStr; j++) {
+                                    finalStr.append((char) inputStream.read());
+                                }
+
+                                respCommands.add(finalStr.toString());
+                                inputStream.read();
+                                inputStream.read();
                             }
-                            inputStream.read();
-
-                            int numComponentStr = Integer.parseInt(componentString.toString());
-                            StringBuilder finalStr = new StringBuilder();
-
-                            for (int j = 0; j < numComponentStr; j++) {
-                                finalStr.append((char) inputStream.read());
-                            }
-
-                            respCommands.add(finalStr.toString());
-                            inputStream.read();
-                            inputStream.read();
+                        } catch (IOException e) {
+                            throw new IOException(e);
                         }
 
                         return respCommands;
